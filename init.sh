@@ -7,7 +7,7 @@
 # git init
 # add allolib as a submodule
 # git submodule add https://github.com/AlloSphere-Research-Group/allolib.git
-git submodule add https://github.com/wang-edward/allolib.git
-git submodule add https://github.com/AlloSphere-Research-Group/al_ext.git
+# git submodule add https://github.com/wang-edward/allolib.git
+# git submodule add https://github.com/AlloSphere-Research-Group/al_ext.git
 
-git submodule update --recursive --init --depth=50
+git submodule update --recursive --init #--depth=50
