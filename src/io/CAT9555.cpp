@@ -1,4 +1,4 @@
-#include "CAT9555.hpp"
+#include "include/io/CAT9555.hpp"
 
 volatile sig_atomic_t flag = 1;
 
@@ -10,7 +10,7 @@ void sig_handler(int signum) {
 }
 
 CAT9555::CAT9555(uint8_t addr) {
-    address = addr;
+    cat_address = addr;
 }
 
 void CAT9555::begin(){
@@ -47,4 +47,4 @@ bool CAT9555::get_status(char index) {
 
 
 
-#endif
+

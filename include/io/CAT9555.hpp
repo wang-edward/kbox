@@ -32,8 +32,6 @@
 #define	CONFIG_PORT1			(uint8_t)0x07
 #define	ADDRESS					(uint8_t)0x20
 
-#define I2C_BUS 0 //todo ??
-
 ////////////////////////////////
 // CAT9555 Class Declaration  //
 ////////////////////////////////
@@ -46,7 +44,7 @@ public:
     bool get_status (char index);
 
 private:
-    mraa::I2c i2c(I2C_BUS);
+    mraa::I2c i2c(3);
     unsigned char cat_address;
     uint16_t data = 0;
 };
