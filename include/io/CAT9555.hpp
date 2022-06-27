@@ -32,11 +32,8 @@
 #define	CONFIG_PORT1			(uint8_t)0x07
 #define	ADDRESS					(uint8_t)0x20
 
-<<<<<<< HEAD
-=======
 // #define I2C_BUS 0 //todo ??
 
->>>>>>> ce1fbd6ef775fcf4e52abd596c8b8805b83e992e
 ////////////////////////////////
 // CAT9555 Class Declaration  //
 ////////////////////////////////
