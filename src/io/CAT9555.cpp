@@ -1,4 +1,4 @@
-#include "CAT9555.hpp"
+#include "include/io/CAT9555.hpp"
 
 volatile sig_atomic_t flag = 1;
 
@@ -44,7 +44,3 @@ bool CAT9555::get_status(char index) {
     }
     return -1; //TODO: throw exception?
 }
-
-
-
-#endif
