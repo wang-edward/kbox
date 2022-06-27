@@ -41,6 +41,8 @@ typedef struct {
 #include "include/circle.hpp"
 #include "include/sprite.hpp"
 
+#include "include/io/CAT9555.hpp"
+
 
 struct MyApp : public al::App {
   PLUGIN CURRENT_PLUGIN = PLUGIN_SUBTRACTIVE;
@@ -148,14 +150,26 @@ struct MyApp : public al::App {
     
 };
 
+#include<unistd.h> //TODO remove (useless library?)
+
 int main() {
-  MyApp app;
+  // MyApp app;
 
   // Start audio
-  app.configureAudio(44100., AUDIO_BLOCK_SIZE, 2, 0);
+  // app.configureAudio(44100., AUDIO_BLOCK_SIZE, 2, 0);
 
   // Set up sampling rate for Gamma objects
-  Domain::master().spu(app.audioIO().framesPerSecond());
+  // Domain::master().spu(app.audioIO().framesPerSecond());
 
-  app.start();
+  // app.start();
+
+  CAT9555 cat000 = CAT9555(0b00100000);
+  CAT9555 cat001 = CAT9555(0b00100001);
+
+  while (true) {
+    cat000.update();
+    cat001.update();
+    unsigned int microsecond = 500000;
+    usleep(microsecond);//sleeps for 3 second
+  }
 }
