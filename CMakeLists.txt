@@ -5,6 +5,11 @@ project(Allotemplate)
 # name of application. replace 'app' with desired app name
 set(APP_NAME app)
 
+# set mraa locations
+set (mraa_INCLUDE_DIRS "/usr/local/include")
+set (mraa_LIBRARIES "/usr/local/lib/libmraa.so")
+include_directories (${APP_NAME} ${mraa_INCLUDE_DIRS})
+
 # path to main source file
 add_executable(${APP_NAME} src/main.cpp src/mpc.cpp src/sample.cpp src/SineEnv.cpp src/wav_editor.cpp src/plot.cpp src/circle.cpp src/sprite.cpp src/io/CAT9555.cpp)
 
@@ -19,7 +24,7 @@ if (EXISTS ${CMAKE_CURRENT_LIST_DIR}/al_ext)
 endif()
 
 # link allolib to project
-target_link_libraries(${APP_NAME} PRIVATE al)
+target_link_libraries(${APP_NAME} PRIVATE al ${mraa_LIBRARIES}) # add mraa
 
 # example line for find_package usage
 # find_package(Qt5Core REQUIRED CONFIG PATHS "C:/Qt/5.12.0/msvc2017_64/lib" NO_DEFAULT_PATH)

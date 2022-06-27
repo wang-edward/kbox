@@ -44,7 +44,3 @@ bool CAT9555::get_status(char index) {
     }
     return -1; //TODO: throw exception?
 }
-
-
-
-
