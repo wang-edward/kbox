@@ -8,5 +8,6 @@
 
 result=$?
 if [ ${result} == 0 ]; then
-  gdb -ex run ./bin/appd
+  gdb -ex run ./bin/app
+  # gdb -ex run ./bin/appd
 fi

@@ -5,6 +5,8 @@ project(Allotemplate)
 # name of application. replace 'app' with desired app name
 set(APP_NAME app)
 
+#set(CMAKE_BUILD_TYPE RelWithDebInfo)
+
 # set mraa locations
 set (mraa_INCLUDE_DIRS "/usr/local/include")
 set (mraa_LIBRARIES "/usr/local/lib/libmraa.so")
