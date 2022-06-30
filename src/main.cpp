@@ -46,6 +46,8 @@ struct MyApp : public al::App {
   PLUGIN CURRENT_PLUGIN = PLUGIN_SUBTRACTIVE;
 
   al::PolySynth pSynth;
+  mpc sampler;
+  plot screen;
 
   void onInit() override {
     //TODO better config
@@ -54,7 +56,7 @@ struct MyApp : public al::App {
   }
   void onCreate() override { //TODO cleanup
     // pSynth.allocatePolyphony<SineEnv>(16);
-    // navControl().active(false);
+    navControl().active(false);
     // nav().pos(0,0,10);
   }
   
@@ -62,7 +64,7 @@ struct MyApp : public al::App {
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
           // std::cout<<"sampler is on"<<std::endl;
-          // sampler.render(io);
+          sampler.render(io);
         break;  
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
         pSynth.render(io);
@@ -81,8 +83,8 @@ struct MyApp : public al::App {
     
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
-        // sampler.render(screen);
-        // sampler.color_discs();
+        sampler.render(screen);
+        sampler.color_discs();
         break;
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
         pSynth.render(g);
@@ -100,13 +102,13 @@ struct MyApp : public al::App {
     swap_screens(key_pressed);
 
     switch (CURRENT_PLUGIN) {
-      // case (PLUGIN_SAMPLER):      // SAMPLER
+      case (PLUGIN_SAMPLER):      // SAMPLER
         
-      //   if (key_pressed>=20 && key_pressed<mpc::NUMBER_SAMPLES +20) {
-      //     key_pressed = key_pressed - 20;
-      //     sampler.key_down(key_pressed);
-      //   }
-      //   break;
+        if (key_pressed>=20 && key_pressed<mpc::NUMBER_SAMPLES +20) {
+          key_pressed = key_pressed - 20;
+          sampler.key_down(key_pressed);
+        }
+        break;
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
         int midiNote = al::asciiToMIDI(k.key());
         if (midiNote > 0) {
