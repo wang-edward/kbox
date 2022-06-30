@@ -50,6 +50,7 @@ struct MyApp : public al::App {
   void onInit() override {
     //TODO better config
     dimensions(960,640);
+    fullScreen(true);
   }
   void onCreate() override { //TODO cleanup
     // pSynth.allocatePolyphony<SineEnv>(16);
