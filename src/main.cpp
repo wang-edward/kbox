@@ -44,9 +44,9 @@ typedef struct {
 
 struct MyApp : public al::App {
   PLUGIN CURRENT_PLUGIN = PLUGIN_SUBTRACTIVE;
-
-  al::PolySynth pSynth;
   mpc sampler;
+  al::PolySynth pSynth;
+  
   plot screen;
 
   void onInit() override {
@@ -57,6 +57,9 @@ struct MyApp : public al::App {
   void onCreate() override { //TODO cleanup
     // pSynth.allocatePolyphony<SineEnv>(16);
     navControl().active(false);
+    // editor.init();
+    sampler.init();
+    screen.init();
     // nav().pos(0,0,10);
   }
   
@@ -84,7 +87,7 @@ struct MyApp : public al::App {
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
         sampler.render(screen);
-        sampler.color_discs();
+
         break;
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
         pSynth.render(g);
@@ -93,6 +96,7 @@ struct MyApp : public al::App {
         // editor.render(g);
         break;
     }
+    screen.render(g);
   }
 
   bool onKeyDown(al::Keyboard const &k) override {

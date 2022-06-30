@@ -7,19 +7,19 @@ void timeline:: init() {
 }
 
 void timeline:: init_files() {
-    // // TODO get rid of DS_Store
-    // std::string path = "./data";
-    // int i=0;
+    // TODO get rid of DS_Store
+    std::string path = "./data";
+    int i=0;
     // for (const auto& file : std::filesystem::directory_iterator(path)) {
-    // // for (const auto& file : std::__fs::filesystem::directory_iterator(path)) {
-    //     if (i>=NUMBER_TRACKS) {
-    //         break;
-    //     }
-    //     std::string s = file.path();
-    //     tracks[i].load_path(s.c_str()); //convert string to const char*
-    //     std::cout<< s.substr(2,s.length())<<std::endl; //skip "./" in file path
-    //     i++;
-    // }
+    for (const auto& file : std::__fs::filesystem::directory_iterator(path)) {
+        if (i>=NUMBER_TRACKS) {
+            break;
+        }
+        std::string s = file.path();
+        tracks[i].load_path(s.c_str()); //convert string to const char*
+        std::cout<< s.substr(2,s.length())<<std::endl; //skip "./" in file path
+        i++;
+    }
 }
 
 void timeline:: render (al::AudioIOData &io) {
