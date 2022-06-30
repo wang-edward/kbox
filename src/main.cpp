@@ -43,7 +43,7 @@ typedef struct {
 
 
 struct MyApp : public al::App {
-  PLUGIN CURRENT_PLUGIN = PLUGIN_SUBTRACTIVE;
+  PLUGIN CURRENT_PLUGIN = PLUGIN_SAMPLER;
   mpc sampler;
   al::PolySynth pSynth;
   
@@ -87,7 +87,6 @@ struct MyApp : public al::App {
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
         sampler.render(screen);
-
         break;
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
         pSynth.render(g);
