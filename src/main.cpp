@@ -25,7 +25,7 @@
 
 #define AUDIO_BLOCK_SIZE 128
 
-enum PLUGIN {PLUGIN_SAMPLER, PLUGIN_SUBTRACTIVE, PLUGIN_WAV_EDITOR};
+enum PLUGIN {PLUGIN_SAMPLER, PLUGIN_SUBTRACTIVE, PLUGIN_TIMELINE, PLUGIN_WAV_EDITOR};
 
 typedef struct {
   float *values;
@@ -40,11 +40,13 @@ typedef struct {
 #include "include/plot.hpp"
 #include "include/circle.hpp"
 #include "include/sprite.hpp"
+#include "include/timeline.hpp"
 
 
 struct MyApp : public al::App {
-  PLUGIN CURRENT_PLUGIN = PLUGIN_SAMPLER;
+  PLUGIN CURRENT_PLUGIN = PLUGIN_TIMELINE;
   mpc sampler;
+  timeline t_line;
   al::PolySynth pSynth;
   
   plot screen;
@@ -71,6 +73,9 @@ struct MyApp : public al::App {
         break;  
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
         pSynth.render(io);
+        break;
+      case (PLUGIN_TIMELINE):
+        t_line.render(io);
         break;
     }
   }

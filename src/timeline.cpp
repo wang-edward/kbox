@@ -23,7 +23,6 @@ void timeline:: init_files() {
 }
 
 void timeline:: render (al::AudioIOData &io) {
-
     if (playing == true) {
         while (io()) {
             float s = 0;

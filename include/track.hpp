@@ -3,6 +3,7 @@
 
 #include <string>
 #include <filesystem>
+
 #include "Gamma/SamplePlayer.h"
 #include "al/graphics/al_Graphics.hpp"
 #include "al/graphics/al_Font.hpp"
@@ -17,8 +18,8 @@ class track {
         void align(long long current_position);
         void load_path(const char* _path);
     protected:
-        long long start_position = 0; //TODO custom start position of sample
-        long long end_position;
+        unsigned long long start_position = 0; //TODO custom start position of sample
+        unsigned long long end_position;
         gam::SamplePlayer<> player;
         float gain = 0.2;
 };
