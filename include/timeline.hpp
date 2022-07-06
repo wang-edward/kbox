@@ -1,18 +1,24 @@
 #ifndef TIMELINE_HPP
 #define TIMELINE_HPP
 
-#include "allolib/include/al/io/al_AudioIOData.hpp"
+#include "allolib/include/al/io/al_AudioIO.hpp"
 #include "include/track.hpp"
-#include <filesystem>
 class timeline {
     public:
-        //render(al::Audioio);
-        void init();
-        void render(al::AudioIOData &io);
-    private:
-        std::vector<track> data;
-        int number_samples = 1;
-};
+        static const int NUMBER_TRACKS = 1;
+        long long current_position;
+        track tracks[NUMBER_TRACKS];
+        bool playing = true;
 
+        void render(al::AudioIOData &io);
+        void align_tracks();
+        void init();
+        
+
+    private:
+        void init_files();
+        
+
+};
 
 #endif
