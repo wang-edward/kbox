@@ -1,25 +1,16 @@
 #ifndef TRACK_HPP
 #define TRACK_HPP
 
-#include <string>
-#include <filesystem>
-
 #include "Gamma/SamplePlayer.h"
-#include "al/graphics/al_Graphics.hpp"
-#include "al/graphics/al_Font.hpp"
-#include "al/io/al_AudioIO.hpp"
 
 class track {
     public:
-
-        bool in_range (long long current_position);
-        void set_position(long long new_position);
+        static constexpr float DEFAULT_GAIN = 0.2;
+        track();
+        track(const char* _path, float _gain);
+        track (const track &obj);
         float output();
-        void align(long long current_position);
-        void load_path(const char* _path);
-    protected:
-        unsigned long long start_position = 0; //TODO custom start position of sample
-        unsigned long long end_position;
+    //private:
         gam::SamplePlayer<> player;
         float gain = 0.2;
 };

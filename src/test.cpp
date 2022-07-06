@@ -24,8 +24,8 @@
 #include "al/ui/al_Parameter.hpp"
 // #include "al/ui/al_FileSelector.hpp"
 
-#include "track.hpp"
-#include "timeline.hpp"
+#include "include/track.hpp"
+#include "include/timeline.hpp"
 
 
 #define AUDIO_BLOCK_SIZE 128
@@ -39,40 +39,27 @@ typedef struct {
 struct MyApp : public al::App {
 
     timeline tl;
-  
+
   void onInit() override {
     tl.init();
-    // tl.playing = true;
   }
   void onCreate() override {
-    navControl().active(false);
     nav().pos(0,0,10);
   }
-  
   void onSound(al::AudioIOData &io) override {
     tl.render(io);
   }
-
   void onDraw (al::Graphics &g) override {
     g.clear();
-    
+
   }
-
   bool onKeyDown(al::Keyboard const &k) override {
-
-    int key_pressed = al::asciiToIndex(k.key());
-    std::cout<<key_pressed<<std::endl;
-
-   
     return true;
   }
-
   // Whenever a key is released this function is called
   bool onKeyUp(al::Keyboard const& k) override {
-    
     return true;
   }
-    
 };
 
 int main() {

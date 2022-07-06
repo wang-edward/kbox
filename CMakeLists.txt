@@ -6,7 +6,10 @@ project(Allotemplate)
 set(APP_NAME app)
 
 # path to main source file
-add_executable(${APP_NAME} src/main.cpp src/mpc.cpp src/sample.cpp src/SineEnv.cpp src/wav_editor.cpp src/plot.cpp src/circle.cpp src/sprite.cpp src/timeline.cpp)
+#add_executable(${APP_NAME} src/main.cpp src/mpc.cpp src/sample.cpp src/SineEnv.cpp src/wav_editor.cpp src/plot.cpp src/circle.cpp src/sprite.cpp src/timeline.cpp src/track.cpp)
+
+# test build
+add_executable(${APP_NAME} src/test.cpp src/timeline.cpp src/track.cpp)
 
 # add allolib as a subdirectory to the project
 add_subdirectory(allolib)
