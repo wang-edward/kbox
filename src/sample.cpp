@@ -13,8 +13,8 @@ void sample:: init(const char* _path, float _gain) {
 }
 //constructor
 sample:: sample (const char* _path, float _gain) {
-    load_path(_path);
-    gain = _gain;
+    // load_path(_path);
+    // gain = _gain;
 }
 //copy constructor
 // sample:: sample (const sample &m) {

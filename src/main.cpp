@@ -48,7 +48,7 @@ struct MyApp : public al::App {
   mpc sampler;
   timeline t_line;
   al::PolySynth pSynth;
-  
+
   plot screen;
 
   void onInit() override {
@@ -60,17 +60,18 @@ struct MyApp : public al::App {
     // pSynth.allocatePolyphony<SineEnv>(16);
     navControl().active(false);
     // editor.init();
-    sampler.init();
+   // sampler.init();
     screen.init();
+    t_line.init();
     // nav().pos(0,0,10);
   }
-  
+
   void onSound(al::AudioIOData &io) override {
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
           // std::cout<<"sampler is on"<<std::endl;
           sampler.render(io);
-        break;  
+        break;
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
         pSynth.render(io);
         break;
@@ -85,10 +86,10 @@ struct MyApp : public al::App {
   }
 
   void onDraw (al::Graphics &g) override {
-    g.camera(Viewpoint::IDENTITY);  
+    g.camera(Viewpoint::IDENTITY);
     g.clear();
 
-    
+
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
         sampler.render(screen);
@@ -100,18 +101,17 @@ struct MyApp : public al::App {
         // editor.render(g);
         break;
     }
-    screen.render(g);
+   screen.render(g);
   }
 
   bool onKeyDown(al::Keyboard const &k) override {
     int key_pressed = al::asciiToIndex(k.key());
     std::cout<<key_pressed<<std::endl; // DEBUG
 
-    swap_screens(key_pressed);
+    // swap_screens(key_pressed); //todo bring back
 
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
-        
         if (key_pressed>=20 && key_pressed<mpc::NUMBER_SAMPLES +20) {
           key_pressed = key_pressed - 20;
           sampler.key_down(key_pressed);
@@ -123,10 +123,9 @@ struct MyApp : public al::App {
           float frequency = ::pow(2., (midiNote - 69.) / 12.) * 440.;
           SineEnv* voice = pSynth.getVoice<SineEnv>();
           std::cout<<frequency<<std::endl;
-          voice->freq(frequency); 
+          voice->freq(frequency);
           pSynth.triggerOn(voice, 0, midiNote);
         }
-
         break;
     }
     return true;
@@ -156,7 +155,7 @@ struct MyApp : public al::App {
       }
     }
   }
-    
+
 };
 
 int main() {
