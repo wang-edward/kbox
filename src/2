@@ -41,23 +41,25 @@ struct MyApp : public al::App {
     //timeline tl;
 
     gam::SamplePlayer<> player;
-    std::deque<gam::SamplePlayer<>> data;
+    player.read('./data/samples/intro.wav');
+    std::vector<gam::SamplePlayer<>> data;
 
   void onInit() override {
     //tl.init();
-    player.load("./data/samples/intro.wav");
   }
   void onCreate() override {
     nav().pos(0,0,10);
-    //data.push_back(gam::SamplePlayer<>("./data/samples/intro.wav"));
-    data.emplace_back(player);
   }
   void onSound(al::AudioIOData &io) override {
     //tl.render(io);
     while (io()) {
-            io.out(0) = io.out(1) = player.read(0)*0.2;
-            player.advance();
+            float s = 0;
+            io.out(0) = io.out(1) = player();
+            current_position++;
         }
+        // current_position+=io.framesPerBuffer();
+        std::cout<<current_position<<"\n"<<std::endl;
+
   }
   void onDraw (al::Graphics &g) override {
     g.clear();
@@ -75,9 +77,9 @@ struct MyApp : public al::App {
 int main() {
     //data.push_back(player);
 
-  MyApp app;
-  app.configureAudio(44100., 256, 2, 0);
-  gam::Domain::master().spu(app.audioIO().framesPerSecond());
+  //MyApp app;
+  //app.configureAudio(44100., 256, 2, 0);
+  //gam::Domain::master().spu(app.audioIO().framesPerSecond());
 
-  app.start();
+  //app.start();
 }

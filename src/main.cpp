@@ -159,7 +159,7 @@ struct MyApp : public al::App {
 };
 
 int main() {
-  MyApp app;
+    MyApp app;
 
   // Start audio
   app.configureAudio(44100., AUDIO_BLOCK_SIZE, 2, 0);
