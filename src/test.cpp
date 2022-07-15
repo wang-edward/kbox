@@ -38,13 +38,13 @@ typedef struct {
 
 struct MyApp : public al::App {
 
-    //timeline tl;
+    timeline tl;
 
     gam::SamplePlayer<> player;
     std::deque<gam::SamplePlayer<>> data;
 
   void onInit() override {
-    //tl.init();
+    tl.init();
     player.load("./data/samples/intro.wav");
   }
   void onCreate() override {
@@ -53,11 +53,7 @@ struct MyApp : public al::App {
     data.emplace_back(player);
   }
   void onSound(al::AudioIOData &io) override {
-    //tl.render(io);
-    while (io()) {
-            io.out(0) = io.out(1) = player.read(0)*0.2;
-            player.advance();
-        }
+    tl.render(io);
   }
   void onDraw (al::Graphics &g) override {
     g.clear();

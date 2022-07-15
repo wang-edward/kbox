@@ -11,13 +11,20 @@ void timeline:: init_files() {
     std::string path = "./data/samples";
     int i=0;
     for (const auto& file : std::__fs::filesystem::directory_iterator(path)) {
+        bool flag = true;
         if (i>=NUMBER_TRACKS) {
             break;
         }
         std::string s = file.path();
-        tracks[i].load_path(s.c_str()); //convert string to const char*
-        std::cout<< s.substr(2,s.length())<<std::endl; //skip "./" in file path
-        i++;
+        if (s.substr(s.length()-3, s.length())=="wav") {
+            track temp_track(s.c_str());
+
+            data.emplace_back(temp_track);
+
+            std::cout<< s.substr(2,s.length())<<data[i].start_position<<data[i].end_position<<std::endl; //skip "./" in file path
+            i++;
+
+        }
     }
 }
 
@@ -29,10 +36,10 @@ void timeline:: render (al::AudioIOData &io) {
 
             for (int i=0;i<NUMBER_TRACKS;i++) {
                 // std::cout<<i<<" ";
-                if (tracks[i].in_range(current_position)) {
-                    float a  = tracks[i].output();
-                    tracks[i].align(current_position);
-                    std::cout<<a<<" ";
+                if (data[i].in_range(current_position)) {
+                    float a  = data[i].output();
+                    data[i].align(current_position);
+                    //std::cout<<a<<" ";
                     s+=a;
                 }
             }
@@ -40,12 +47,12 @@ void timeline:: render (al::AudioIOData &io) {
             current_position++;
         }
         // current_position+=io.framesPerBuffer();
-        std::cout<<current_position<<"\n"<<std::endl;
-    }  
+        //std::cout<<current_position<<"\n"<<std::endl;
+    }
 }
 
 void timeline:: align_tracks() {
     for (int i=0;i<NUMBER_TRACKS;i++) {
-        tracks[i].align(current_position);
+        data[i].align(current_position);
     }
 }

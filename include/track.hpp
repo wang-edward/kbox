@@ -11,16 +11,22 @@
 class track {
     public:
 
+        static constexpr float DEFAULT_GAIN = 0.2;
+
+        track();
+        track(const char* _path);
+
         bool in_range (long long current_position);
         void set_position(long long new_position);
-        float output();
         void align(long long current_position);
         void load_path(const char* _path);
-    protected:
+        void calculate_positions();
+        float output();
+    //protected:
         long long start_position = 0; //TODO custom start position of sample
         long long end_position;
         gam::SamplePlayer<> player;
-        float gain = 0.2;
+        float gain = DEFAULT_GAIN;
 };
 
 #endif

@@ -5,19 +5,17 @@
 #include "include/track.hpp"
 class timeline {
     public:
-        static const int NUMBER_TRACKS = 1;
+        static const int NUMBER_TRACKS = 4;
         long long current_position;
-        track tracks[NUMBER_TRACKS];
+        std::deque<track> data;
         bool playing = true;
 
         void render(al::AudioIOData &io);
         void align_tracks();
         void init();
-        
 
     private:
         void init_files();
-        
 
 };
 
