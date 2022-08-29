@@ -89,7 +89,6 @@ struct MyApp : public al::App {
     g.camera(Viewpoint::IDENTITY);
     g.clear();
 
-
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
         sampler.render(screen);
@@ -99,6 +98,8 @@ struct MyApp : public al::App {
         break;
       case (PLUGIN_WAV_EDITOR):
         // editor.render(g);
+        break;
+      case (PLUGIN_TIMELINE):
         break;
     }
    screen.render(g);

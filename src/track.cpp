@@ -1,11 +1,24 @@
 #include "include/track.hpp"
 
-track::track() {
-
+track::track(int _index) {
+    index = _index;
+    int x = 0.5 - (0.5 * index);
+    int wh = 1.0 - (0.5 * index);
+    // al::addRect(rect, 0, 0,1,1);
+    al::addRect(rect, -1, x,wh,wh);
 }
 
-track::track(const char* _path) {
+track::track(const char* _path, int _index) {
+    
+    //TODO change to super/inheritance
+    index = _index;
+    int x = 0.5 - (0.5 * index);
+    int wh = 1.0 - (0.5 * index);
+    // al::addRect(rect, 0, 0,1,1);
+    al::addRect(rect, -1, x,wh,wh);
+
     load_path(_path);
+    al::addRect(rect, 0, 0,1,1);
 }
 
 bool track:: in_range(long long current_position) {
@@ -44,3 +57,16 @@ void track:: load_path(const char* _path) {
     // player.pos(player.frames());
     end_position = player.frames() + start_position; // TODO custom end position of sample
 }
+
+void track:: render(al::Graphics& g) {
+    g.draw(rect);
+}
+
+void track:: scale(float width, float position) {
+    rect.scale(width,1,1);
+    // rect.translate(rand() / (float) RAND_MAX - 0.5, 0, 0);
+}
+
+long long track:: get_start() { return start_position; }
+
+long long track::get_end() { return end_position; }
