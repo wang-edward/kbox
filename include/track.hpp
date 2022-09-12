@@ -31,7 +31,7 @@ class track {
         long long get_end();
         std::string path;
         
-    protected:
+    // protected:
         long long start_position = 0; //TODO custom start position of sample
         long long end_position;
         gam::SamplePlayer<> player;

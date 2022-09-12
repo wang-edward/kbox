@@ -2,6 +2,7 @@
 #define TIMELINE_HPP
 
 #include "allolib/include/al/io/al_AudioIO.hpp"
+#include "allolib/include/al/graphics/al_Mesh.hpp"
 #include "include/track.hpp"
 #include <algorithm>
 class timeline {
@@ -22,7 +23,9 @@ class timeline {
         long long max_width = 10000;
         long long left_side = 0; //left side of current window
         long long right_side = 1000000; //right side of current window
-        long long step = 1000;
+        long long step = 10000;
+
+        al::Mesh cursor;
         // horizontal and vertical zoom
 };
 

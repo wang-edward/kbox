@@ -64,7 +64,7 @@ void track:: render(al::Graphics& g) {
 void track:: scale(float width, float position) {
     al::Vec3f min(0), max(0);
     rect.getBounds(min,max);
-    std::cout<<"min: "<<min<<"max: "<<max<<std::endl;
+    // std::cout<<"min: "<<min<<"max: "<<max<<std::endl;
     // min (x, y, z) holds bottom left of rect
     // max (x, y, z) holds top right of rect
 

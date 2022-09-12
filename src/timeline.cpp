@@ -3,12 +3,15 @@
 #include <chrono>
 #include <cmath>
 #include <cstdint>
+#include <algorithm>
+
+using namespace std::chrono;
 
 timeline:: timeline() {
     current_position = 0;
 
     // TODO get rid of DS_Store
-    std::string path = "./data/samples";
+    std::string path = "./data/beat";
     int i=0;
     for (const auto& file : std::__fs::filesystem::directory_iterator(path)) {
         bool flag = true;
@@ -35,6 +38,19 @@ timeline:: timeline() {
         for (int i=0;i<6;i++) {
             t.rect.color(temp);
         }
+
+        std::cout<<t.path<<std::endl;
+    }
+
+    data[0].set_position(452000);
+    data[1].set_position(815000 - 452000 + 815000);
+    data[1].gain = 0.06;
+    data[2].set_position(815000);
+    data[2].gain = 0.1;
+
+    addRect(cursor, 0,-1, 0.01, 2);
+    for (int i=0;i<6;i++) {
+        cursor.color(al::RGB(1,1,1));
     }
         
 }
@@ -65,6 +81,7 @@ void timeline:: render (al::Graphics& g) {
     for (track t : data) {
         t.render(g);
     }
+    g.draw(cursor);
 }
 
 void timeline:: align_tracks() {
@@ -74,20 +91,32 @@ void timeline:: align_tracks() {
 }
 
 void timeline:: update_graphics() {
+    //width of window
 
-    double ms = std::chrono::duration_cast< std::chrono::milliseconds >(std::chrono::system_clock::now().time_since_epoch().count());
-    
-    right_side = std::sin(ms) * 1000000;
+    left_side = current_position - step;
+    right_side = current_position + step;
+
+    long long timeline_frames = right_side - left_side;
+
     for (int i=0;i<NUMBER_TRACKS;i++) {
         track& t = data[i];
-        std::cout<<"track path: "<<t.path<<std::endl;
+        // std::cout<<"track path: "<<t.path<<std::endl;
 
+        long long l_frames, r_frames;
+        if (t.get_start() - left_side < 0) {
+            l_frames = 0;
+        } else {
+            l_frames = t.get_start() - left_side;
+        }
+        if (right_side - t.get_end() > 0) {
+            r_frames = 0;
+        } else {
+            r_frames = right_side - t.get_end();
+        }
 
-        long long l_frames = std::max((long long)0, t.get_start() - left_side); //distance from left edge in frames
-        long long r_frames = std::max((long long)0, right_side - t.get_end()); //distance from right edge in frames
-
-        //width of window
-        long long timeline_frames = right_side - left_side;
+        l_frames = std::max((long long)0, t.get_start() - left_side); //distance from left edge in frames
+        r_frames = std::max((long long)0, right_side - t.get_end()); //distance from right edge in frames
+        
         //width of track within window
         long long rect_frames = timeline_frames - l_frames - r_frames;
 
@@ -101,8 +130,8 @@ void timeline:: update_graphics() {
 
         float rect_position  = (float)r_dist - (float)l_dist;
         t.scale(rect_width, rect_position);
-        std::cout<<"l_frames: "<<l_frames<<" r_frames: "<<r_frames<<" timeline_frames: "<<timeline_frames<<" rect_frames: "<<rect_frames<<std::endl;
-        std::cout<<rect_width<<std::endl;
+        // std::cout<<"l_frames: "<<l_frames<<" r_frames: "<<r_frames<<" timeline_frames: "<<timeline_frames<<" rect_frames: "<<rect_frames<<std::endl;
+        // std::cout<<rect_width<<std::endl;
         t.rect.translate(rect_width/2 - 1, i * 0.5 - 1, 0);
     }
 
