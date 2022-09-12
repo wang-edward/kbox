@@ -43,6 +43,7 @@ timeline:: timeline() {
     }
 
     data[0].set_position(452000);
+    data[0].gain = 0.4;
     data[1].set_position(815000 - 452000 + 815000);
     data[1].gain = 0.06;
     data[2].set_position(815000);
