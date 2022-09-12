@@ -38,32 +38,14 @@ typedef struct {
 
 struct MyApp : public al::App {
 
-    timeline tl;
-
-    gam::SamplePlayer<> player;
-    std::deque<gam::SamplePlayer<>> data;
-
-    al::Mesh m;
+  timeline tl;
 
   void onInit() override {
-    tl.init();
-    player.load("./data/samples/intro.wav");
-
-    m.primitive(al::Mesh::TRIANGLES);
-    al::addRect(m,-1,-1,1,1);
-    al::Color temp = al::HSV(0.4,0.9,0.9);
-    m.colors().clear();
-    m.color(temp);
-    m.color(temp);
-    m.color(temp);
-    m.color(temp);
-    m.color(temp);
-    m.color(temp);
+    tl = timeline();
   }
   void onCreate() override {
     nav().pos(0,0,10);
     //data.push_back(gam::SamplePlayer<>("./data/samples/intro.wav"));
-    data.emplace_back(player);
   }
   void onSound(al::AudioIOData &io) override {
     tl.render(io);
@@ -74,8 +56,6 @@ struct MyApp : public al::App {
     g.meshColor();
     tl.update_graphics();
     tl.render(g);
-    g.draw(m);
-    m.translate(rand() / (float)RAND_MAX - 0.5, 0, 0);
   }
   bool onKeyDown(al::Keyboard const &k) override {
     return true;

@@ -29,6 +29,7 @@ class track {
 
         long long get_start();
         long long get_end();
+        std::string path;
         
     protected:
         long long start_position = 0; //TODO custom start position of sample
