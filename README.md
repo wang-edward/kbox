@@ -1,34 +1,43 @@
-# allotemplate
-Template for creating applications using allolib. This template is suitable for large projects wil multiple files and dependencies where you need more control. If you are prototyping single files or want to explore the allolib examples, use the [allolib_playground repo](https://github.com/AlloSphere-Research-Group/allolib_playground).
+# About
 
-Developed by:
+Pretty much the Teenage Engineering OP-1 but worse
 
-AlloSphere Research Group
+![doom_gif](https://user-images.githubusercontent.com/53409587/165104248-1447658f-bb47-44e4-80aa-21c08de183ec.gif)
 
-University of California, Santa Barbara
+Progress: https://wang-edward.github.io/box-(OP-1-Clone)/
 
 # Installation
-Allotemplate currently requires:
+
+gbox currently requires:
  * bash shell
  * git
  * cmake version 3.0 or higher
 
-## Using `alloinit`
-The [`alloinit`](utils/alloinit.md) one-step project initializer can be used to
-initialize a new alloinit project as follows:
+## MacOS dependencies
+Install xcode command line tools (if it doesn't work try install full xcode):
 
-```sh
-curl -L https://github.com/Allosphere-Research-Group/allotemplate/raw/master/utils/alloinit \
-    | bash -s proj  # Download `alloinit` and initialize an `allotemplate` project in `proj/`.
-cd proj             # A copy of `alloinit` is now in `proj/utils`.
-./run.sh            # Run your new project!
-```
+    xcode-select --install
 
-## Manually creating a new project based on allotemplate
+Install homebrew ([brew.sh](https://brew.sh)), then:
+
+    brew install git git-lfs cmake libsndfile
+    
+## Ubuntu / Debian dependencies
+    sudo apt install build-essential git git-lfs cmake libsndfile1-dev libassimp-dev libasound-dev libxrandr-dev libopengl-dev libxinerama-dev libxcursor-dev libxi-dev
+    
+Note: requires gcc >= 7
+
+Also, make sure to comment out line 2 in CMakeLists.txt (still might not work though)   
+      
+    gbox/CMakeLists.txt
+      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -target x86_64-apple-darwin20.3.0") # -target is for m1 mac only
+      # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread") # USE THIS FOR UBUNTU/DEBIAN
+
+## Initialization
 On a bash shell:
 
-    git clone https://github.com/AlloSphere-Research-Group/allotemplate.git <project folder name>
-    cd <project folder name>
+    git clone https://github.com/wang-edward/gbox.git
+    cd gbox
     ./init.sh
 
 This will prepare the project as a fresh git repository and will add allolib and al_ext as submodules.
