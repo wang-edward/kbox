@@ -1,5 +1,15 @@
 #include "include/mpc.hpp"
+namespace box {
 
+Mpc::Mpc(std::initializer_list<box::Sample> ls) : samples{ls} {
+
+}
+
+int Mpc::size() const {
+    return samples.size();
+}
+
+}
 void mpc:: init() {
     init_files();
     position_discs();
@@ -69,3 +79,4 @@ void mpc:: render(al::AudioIOData &io) {
 void mpc:: key_down(int key) {
     samples[key].trigger_on();
 }
+

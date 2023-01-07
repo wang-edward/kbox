@@ -1,5 +1,4 @@
-#ifndef SAMPLE_HPP
-#define SAMPLE_HPP
+#pragma once
 
 #include "Gamma/SamplePlayer.h"
 #include "Gamma/Envelope.h"
@@ -8,49 +7,40 @@
 #include <random>
 #include "include/circle.hpp"
 #include "include/plot.hpp"
+#include "include/Plugin.hpp"
 #include <cstdlib>
+namespace box {
 
-class sample {
-  public:
-    const char* path;
-    al::Color col = al::HSV(1,1,1);
-    circle disc = circle(100,100, 30, col);
+class Sample : Plugin {
+public:
+  Sample (const char* _path, float _gain);
+  Sample (Sample& s); // copy constructor
+  Sample& operator=(Sample& s); // copy assignment operator
+  Sample(Sample&& s); // move constructor
+  Sample& operator=(Sample&& s); // move assignment operator
 
-    // void init() override { addDisc(disc, 1.0, 30); }
+  ~Sample();
+  
+  void update_gain(float _gain);
+  void update_envelope(float a, float d, float s, float r);
+
+  
+  void onProcess(al::AudioIOData& io) override;
+  void onProcess(al::Graphics& g) override;
+  void onTriggerOn(al::Keyboard const &k) override;
+  void onTriggerOff(al::Keyboard const &k) override;
+private:
+  const char* path;
+  float gain;
+
+  circle disc = circle(100,100, 30, col);
+  
+  gam::SamplePlayer<> player;
+  gam::ADSR<> envelope;
     
-    //constructors
-    sample();
-    sample (const char* _path, float _gain);
+  void load_path(const char* _path);
+  void reset_color();
     
-    //copy constructor
-    // sample (const sample &m);
-
-    //copy assignment operator
-    // sample& operator=(const sample& new_sample);
-
-    // //destructor
-    // ~sample();
-    
-    // void onProcess(AudioIOData& io) override;
-
-    // void onProcess(Graphics& g) override;
-
-    // void onTriggerOn() override;
-
-    // void onTriggerOff() override;
-
-    void init(const char* _path, float _gain);
-    void load_path(const char* _path);
-    void update_gain(float _gain);
-    void update_envelope(float a, float d, float s, float r);
-    void reset_color();
-    void trigger_on();
-    float output();
-    void render(plot& p);
-    protected:
-      gam::SamplePlayer<> player;
-      gam::Env<3> amp_envelope;
-      float gain;
 };
 
-#endif
+}
