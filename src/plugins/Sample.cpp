@@ -24,11 +24,6 @@ Sample& Sample:: operator=(Sample&& s) {
     return *this;
 }
 
-void Sample:: onTriggerOn(al::Keyboard const &k) {
-    player.reset();
-    reset_color();
-}
-
 // ----------------------------------------------------
 // parameter change 
 // ----------------------------------------------------
@@ -41,6 +36,10 @@ void Sample:: update_envelope(float a, float d, float s, float r) {
     // TODO
 }
 
+// ----------------------------------------------------
+// overrides 
+// ----------------------------------------------------
+
 void Sample:: onProcess(al::AudioIOData& io) {
     while (io()) {
         float cur = player() * gain;
@@ -51,9 +50,12 @@ void Sample:: onProcess(al::AudioIOData& io) {
 void Sample:: onProcess(al::Graphics& g) {
 
 }
-void Sample:: onTriggerOn(al::Keyboard const &k) {
 
+void Sample:: onTriggerOn(al::Keyboard const &k) {
+    player.reset();
+    // reset_color();
 }
+
 void Sample:: onTriggerOff(al::Keyboard const &k) {
 
 }
@@ -86,24 +88,24 @@ void Sample:: load_path(const char* _path) {
 
 
 
-void sample:: reset_color() {
-    float h = std::rand()/(float)(RAND_MAX);
-    float s = std::rand()/(float)(RAND_MAX);
-    float v = std::rand()/(float)(RAND_MAX);
+// void sample:: reset_color() {
+//     float h = std::rand()/(float)(RAND_MAX);
+//     float s = std::rand()/(float)(RAND_MAX);
+//     float v = std::rand()/(float)(RAND_MAX);
 
-    al::Color temp = al::HSV(h,1.0,1.0);
-    disc.transform_color(temp);
-}
+//     al::Color temp = al::HSV(h,1.0,1.0);
+//     disc.transform_color(temp);
+// }
 
-void sample:: trigger_on() {
+// void sample:: trigger_on() {
 
-}
+// }
 
-float sample:: output() {
-    return player() * gain;
-}
+// float sample:: output() {
+//     return player() * gain;
+// }
 
-void sample:: render (plot& p) {
-    disc.render(p);
-}
+// void sample:: render (plot& p) {
+//     disc.render(p);
+// }
 

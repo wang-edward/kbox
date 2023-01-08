@@ -9,12 +9,12 @@ namespace box {
 class Plugin {
 
 public:
-    Plugin();
+    // Plugin();
     // Plugin(const Plugin&);
     // Plugin(Plugin&&);
     // Plugin& operator=(const Plugin&);
     // Plugin& operator=(Plugin&&);
-    virtual ~Plugin();
+    // virtual ~Plugin();
 
     virtual void onProcess(al::AudioIOData &io) = 0;
     virtual void onProcess(al::Graphics& g) = 0;

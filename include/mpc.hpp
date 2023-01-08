@@ -1,5 +1,5 @@
 #pragma once
-#include "include/plugin.hpp"
+#include "include/Plugin.hpp"
 #include "sample.hpp"
 #include <vector>
 #include <string>
@@ -17,14 +17,15 @@ public:
 
   int size() const;
   
-  void onProcess(al::AudioIOData &io) override;
+  void onProcess(al::AudioIOData& io) override;
   void onProcess(al::Graphics& g) override;
+  void onTriggerOn(al::Keyboard const &k) override;
+  void onTriggerOff(al::Keyboard const &k) override;
 
 private:
-
+  static constexpr int MAX_SIZE = 16;
   std::vector<box::Sample> samples;
-  void init();
-  void init_font();
+  
   void init_files();
   void color_discs();
   void position_discs();

@@ -5,10 +5,9 @@
 #include "al/graphics/al_Shapes.hpp"
 #include <iostream>
 #include <random>
-#include "include/circle.hpp"
-#include "include/plot.hpp"
-#include "include/Plugin.hpp"
 #include <cstdlib>
+
+#include "include/Plugin.hpp"
 namespace box {
 
 class Sample : Plugin {
@@ -19,7 +18,7 @@ public:
   Sample(Sample&& s); // move constructor
   Sample& operator=(Sample&& s); // move assignment operator
 
-  ~Sample();
+  ~Sample() = default;
   
   void update_gain(float _gain);
   void update_envelope(float a, float d, float s, float r);
@@ -33,8 +32,6 @@ private:
   const char* path;
   float gain;
 
-  circle disc = circle(100,100, 30, col);
-  
   gam::SamplePlayer<> player;
   gam::ADSR<> envelope;
     
