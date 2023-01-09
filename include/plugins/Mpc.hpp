@@ -1,13 +1,12 @@
 #pragma once
-#include "include/Plugin.hpp"
-#include "sample.hpp"
+#include "plugins/Plugin.hpp"
+#include "plugins/Sample.hpp"
 #include <vector>
 #include <string>
 #include <filesystem>
 #include "al/graphics/al_Graphics.hpp"
 #include "al/graphics/al_Font.hpp"
 #include "al/io/al_AudioIO.hpp"
-#include "include/plot.hpp"
 namespace box {
 class Mpc : Plugin {
 

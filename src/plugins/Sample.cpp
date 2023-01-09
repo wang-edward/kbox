@@ -1,4 +1,4 @@
-#include "include/sample.hpp"
+#include "include/plugins/sample.hpp"
 
 namespace box {
 

@@ -7,7 +7,7 @@
 #include <random>
 #include <cstdlib>
 
-#include "include/Plugin.hpp"
+#include "include/plugins/Plugin.hpp"
 namespace box {
 
 class Sample : Plugin {

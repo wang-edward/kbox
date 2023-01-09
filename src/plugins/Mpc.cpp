@@ -1,4 +1,4 @@
-#include "include/Mpc.hpp"
+#include "include/plugins/Mpc.hpp"
 namespace box {
 
 // ----------------------------------------------------
@@ -25,16 +25,18 @@ int Mpc:: size() const {
 // overrides 
 // ----------------------------------------------------
 
-void onProcess(al::AudioIOData& io) {
+void Mpc:: onProcess(al::AudioIOData& io) {
     for (auto sample : samples) {
         sample.onProcess(io);
     }
 } 
-void onProcess(al::Graphics& g) { }
-void onTriggerOn(al::Keyboard const &k) {
+void Mpc:: onProcess(al::Graphics& g) { }
+void Mpc:: onTriggerOn(al::Keyboard const &k) {
     
 }
-void onTriggerOff(al::Keyboard const &k) override;
+void Mpc:: onTriggerOff(al::Keyboard const &k) override {
+
+}
 
 // ----------------------------------------------------
 // private (utils) 
@@ -59,7 +61,7 @@ void Mpc:: initRandom() {
 
 }
 
-}
+} // namespace box
 
 // void mpc:: color_discs() {
 //     for (int i=0;i<NUMBER_SAMPLES;i++) {
