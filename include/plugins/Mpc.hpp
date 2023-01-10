@@ -28,8 +28,6 @@ private:
   void init_files();
   void color_discs();
   void position_discs();
-  void render(plot& p);
-  void render(al::AudioIOData &io);
   void key_down(int key);
   
 };

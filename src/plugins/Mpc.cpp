@@ -5,13 +5,9 @@ namespace box {
 // constructors 
 // ----------------------------------------------------
 
-Mpc:: Mpc() {
+Mpc:: Mpc() { }
 
-}
-
-Mpc:: Mpc(std::initializer_list<box::Sample> ls) : samples{ls} {
-
-}
+Mpc:: Mpc(std::initializer_list<box::Sample> ls) : samples{ls} { }
 
 // ----------------------------------------------------
 // public (utils)
