@@ -2,7 +2,7 @@
 
 Pretty much the Teenage Engineering OP-1 but worse
 
-![doom_gif](https://user-images.githubusercontent.com/53409587/165104248-1447658f-bb47-44e4-80aa-21c08de183ec.gif)
+![image](https://user-images.githubusercontent.com/53409587/215152499-2220da94-9420-410a-a114-4b7c6da4a934.png)
 
 Progress: https://wang-edward.github.io/box-(OP-1-Clone)/
 
