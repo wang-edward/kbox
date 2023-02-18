@@ -6,7 +6,7 @@ project(Allotemplate)
 set(APP_NAME app)
 
 # path to main source file
-add_executable(${APP_NAME} src/main.cpp src/Sample.cpp)
+add_executable(${APP_NAME} src/main.cpp src/plugins/Sample.cpp)
 
 # add allolib as a subdirectory to the project
 add_subdirectory(allolib)

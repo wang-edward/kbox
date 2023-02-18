@@ -21,7 +21,7 @@
 #include "al/ui/al_ControlGUI.hpp"
 #include "al/ui/al_Parameter.hpp"
 
-#include "include/Sample.hpp"
+#include "include/plugins/Sample.hpp"
 
 #define AUDIO_BLOCK_SIZE 128
 
@@ -36,6 +36,9 @@ typedef struct {
 struct MyApp : public al::App {
   
   box::Sample mySample{"data/samples/test/beat.wav", 0.4};
+  al::Mesh square;
+  al::Mesh mesh;
+  al::Mesh circle;
 
   void onInit() override {
     //TODO better config
@@ -44,6 +47,27 @@ struct MyApp : public al::App {
   }
   void onCreate() override { //TODO cleanup
     std::cout<<"hi\n\n\nHI\n\n"<<std::endl;
+    // square.primitive(al::Mesh::TRIANGLE_STRIP);
+    al::addCube(square, 1);
+    al::addDisc(circle, 0.5, 40);
+    // First, we add the vertex positions in a zig-zag pattern.
+    mesh.vertex(-1, 1, 0);   // 0: top-left corner
+    // mesh.vertex(-1, -1, 0);  // 1: bottom-left corner
+    // mesh.vertex(1, 1, 0);    // 2: top-right corner
+    // mesh.vertex(1, -1, 0);   // 3: bottom-right corner
+    mesh.vertex(0,0,0);
+    mesh.vertex(1,1,0);
+
+    // Next, we add the vertex colors (in RGB color space), using the same
+    // order as the positions above.
+    mesh.color(1, 0, 0);  // 0: red
+    mesh.color(0, 1, 0);  // 1: green
+    mesh.color(0, 0, 1);  // 2: blue
+    mesh.color(1, 1, 1);  // 3: white
+    // nav().pos(0, 0, 4);
+    
+    circle.color(1, 0, 0);  // 0: red
+    circle.color(0, 1, 0);  // 1: green
 
   }
   
@@ -56,7 +80,12 @@ struct MyApp : public al::App {
   }
 
   void onDraw (al::Graphics &g) override {
-
+    g.camera(al::Viewpoint::UNIT_ORTHO_INCLUSIVE);
+    g.meshColor();
+    g.clear();
+    // g.draw(square);
+    g.draw(mesh);
+    g.draw(circle);
   }
 
   bool onKeyDown(al::Keyboard const &k) override {

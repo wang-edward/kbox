@@ -18,7 +18,7 @@ public:
   Sample(Sample&& s); // move constructor
   Sample& operator=(Sample&& s); // move assignment operator
 
-  ~Sample() = default;
+  ~Sample() {};
   
   void update_gain(float _gain);
   void update_envelope(float a, float d, float s, float r);

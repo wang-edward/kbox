@@ -13,6 +13,7 @@ class Mpc : Plugin {
 public:
   Mpc();
   Mpc(std::initializer_list<box::Sample>);
+  ~Mpc() = default;
 
   int size() const;
   

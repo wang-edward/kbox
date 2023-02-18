@@ -1,6 +1,5 @@
 #pragma once
 #include "al/graphics/al_Graphics.hpp"
-#include "al/graphics/al_Font.hpp"
 #include "al/io/al_AudioIO.hpp"
 #include "al/io/al_Window.hpp"
 
@@ -14,7 +13,7 @@ public:
     // Plugin(Plugin&&);
     // Plugin& operator=(const Plugin&);
     // Plugin& operator=(Plugin&&);
-    // virtual ~Plugin();
+    // virtual ~Plugin() = 0;
 
     virtual void onProcess(al::AudioIOData &io) = 0;
     virtual void onProcess(al::Graphics& g) = 0;

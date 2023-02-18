@@ -59,6 +59,14 @@ void Mpc:: initRandom() {
 
 } // namespace box
 
+
+
+
+
+
+
+
+
 // void mpc:: color_discs() {
 //     for (int i=0;i<NUMBER_SAMPLES;i++) {
 //         samples[i].reset_color();
