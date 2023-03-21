@@ -50,23 +50,18 @@ struct MyApp : public al::App {
   plot screen;
 
   void onInit() override {
-    //TODO better config
     dimensions(960,640);
     fullScreen(true);
   }
-  void onCreate() override { //TODO cleanup
-    // pSynth.allocatePolyphony<SineEnv>(16);
+  void onCreate() override { 
     navControl().active(false);
-    // editor.init();
     sampler.init();
     screen.init();
-    // nav().pos(0,0,10);
   }
   
   void onSound(al::AudioIOData &io) override {
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
-          // std::cout<<"sampler is on"<<std::endl;
           sampler.render(io);
         break;  
       case (PLUGIN_SUBTRACTIVE):  // SUBTRACTIVE SYNTH
@@ -75,14 +70,11 @@ struct MyApp : public al::App {
     }
   }
 
-  void onAnimate (double dt) override {
-
-  }
+  void onAnimate (double dt) override {}
 
   void onDraw (al::Graphics &g) override {
     g.camera(Viewpoint::IDENTITY);  
     g.clear();
-
     
     switch (CURRENT_PLUGIN) {
       case (PLUGIN_SAMPLER):      // SAMPLER
@@ -92,7 +84,6 @@ struct MyApp : public al::App {
         pSynth.render(g);
         break;
       case (PLUGIN_WAV_EDITOR):
-        // editor.render(g);
         break;
     }
     screen.render(g);
